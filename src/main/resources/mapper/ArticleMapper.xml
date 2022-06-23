@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lsilencej.blog_system.mapper.ArticleMapper">
-  <resultMap id="BaseResultMap" type="com.lsilencej.blog_system.entity.Article">
+<mapper namespace="com.lsilencej.blogsystem.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.lsilencej.blogsystem.entity.Article">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="created" jdbcType="DATE" property="created" />
@@ -11,7 +11,7 @@
     <result column="allow_comment" jdbcType="BIT" property="allowComment" />
     <result column="thumbnail" jdbcType="VARCHAR" property="thumbnail" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lsilencej.blog_system.entity.Article">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lsilencej.blogsystem.entity.Article">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -32,7 +32,7 @@
     delete from t_article
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lsilencej.blog_system.entity.Article">
+  <insert id="insert" parameterType="com.lsilencej.blogsystem.entity.Article">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -45,7 +45,7 @@
       #{allowComment,jdbcType=BIT}, #{thumbnail,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lsilencej.blog_system.entity.Article">
+  <insert id="insertSelective" parameterType="com.lsilencej.blogsystem.entity.Article">
     insert into t_article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -106,7 +106,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lsilencej.blog_system.entity.Article">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsilencej.blogsystem.entity.Article">
     update t_article
     <set>
       <if test="title != null">
@@ -136,7 +136,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lsilencej.blog_system.entity.Article">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lsilencej.blogsystem.entity.Article">
     update t_article
     set title = #{title,jdbcType=VARCHAR},
       created = #{created,jdbcType=DATE},
@@ -148,7 +148,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lsilencej.blog_system.entity.Article">
+  <update id="updateByPrimaryKey" parameterType="com.lsilencej.blogsystem.entity.Article">
     update t_article
     set title = #{title,jdbcType=VARCHAR},
       created = #{created,jdbcType=DATE},
@@ -159,10 +159,10 @@
       thumbnail = #{thumbnail,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectArticles" resultType="com.lsilencej.blog_system.entity.Article">
+  <select id="getAllArticles" resultType="com.lsilencej.blogsystem.entity.Article">
     select * from t_article order by id desc
   </select>
-  <select id="countArticle" resultType="java.lang.Integer">
+  <select id="countAllArticles" resultType="java.lang.Integer">
     select count(1) from t_article
   </select>
 </mapper>

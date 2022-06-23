@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lsilencej.blog_system.mapper.StatisticMapper">
-  <resultMap id="BaseResultMap" type="com.lsilencej.blog_system.entity.Statistic">
+<mapper namespace="com.lsilencej.blogsystem.mapper.StatisticMapper">
+  <resultMap id="BaseResultMap" type="com.lsilencej.blogsystem.entity.Statistic">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="article_id" jdbcType="INTEGER" property="articleId" />
     <result column="hits" jdbcType="INTEGER" property="hits" />
@@ -14,19 +14,19 @@
     select 
     <include refid="Base_Column_List" />
     from t_statistic
-    where article_id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_statistic
-    where article_id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lsilencej.blog_system.entity.Statistic">
+  <insert id="insert" parameterType="com.lsilencej.blogsystem.entity.Statistic">
     insert into t_statistic (id, article_id, hits, 
       comments_num)
     values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{hits,jdbcType=INTEGER}, 
       #{commentsNum,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.lsilencej.blog_system.entity.Statistic">
+  <insert id="insertSelective" parameterType="com.lsilencej.blogsystem.entity.Statistic">
     insert into t_statistic
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lsilencej.blog_system.entity.Statistic">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsilencej.blogsystem.entity.Statistic">
     update t_statistic
     <set>
       <if test="articleId != null">
@@ -72,21 +72,24 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lsilencej.blog_system.entity.Statistic">
+  <update id="updateByPrimaryKey" parameterType="com.lsilencej.blogsystem.entity.Statistic">
     update t_statistic
     set article_id = #{articleId,jdbcType=INTEGER},
       hits = #{hits,jdbcType=INTEGER},
       comments_num = #{commentsNum,jdbcType=INTEGER}
-    where article_id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getTotalHit" resultType="java.lang.Long">
+  <select id="getTotalHitsNum" resultType="java.lang.Integer">
     select sum(hits) from t_statistic
   </select>
-  <select id="getTotalComment" resultType="java.lang.Long">
+  <select id="getTotalCommentsNum" resultType="java.lang.Integer">
     select sum(comments_num) from t_statistic
   </select>
-  <select id="getStatistic" resultType="com.lsilencej.blog_system.entity.Statistic">
+  <select id="getOrderHitsComments" resultType="com.lsilencej.blogsystem.entity.Statistic">
     select * from t_statistic where hits != '0' order by hits desc, comments_num desc
+  </select>
+  <select id="selectByArticleId" resultType="com.lsilencej.blogsystem.entity.Statistic">
+    select * from t_statistic where article_id = #{articleId}
   </select>
   <update id="updateArticleHits">
     update t_statistic
@@ -99,6 +102,10 @@
     where article_id = #{articleId, jdbcType=INTEGER}
   </update>
   <insert id="addStatistic">
-    insert into t_statistic(article_id, hits, comments_num) values (#{id, jdbcType = INTEGER}, 0, 0);
+    insert into t_statistic(article_id, hits, comments_num) values (#{id, jdbcType=INTEGER}, 0, 0)
   </insert>
+  <delete id="deleteByArticleId">
+    delete from t_statistic
+    where article_id = #{articleId, jdbcType=INTEGER}
+  </delete>
 </mapper>

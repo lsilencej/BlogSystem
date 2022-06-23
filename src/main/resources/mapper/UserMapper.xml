@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lsilencej.blog_system.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.lsilencej.blog_system.entity.User">
+<mapper namespace="com.lsilencej.blogsystem.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.lsilencej.blogsystem.entity.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -22,13 +22,13 @@
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lsilencej.blog_system.entity.User">
+  <insert id="insert" parameterType="com.lsilencej.blogsystem.entity.User">
     insert into t_user (id, username, password, 
       email, created, valid)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{created,jdbcType=DATE}, #{valid,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.lsilencej.blog_system.entity.User">
+  <insert id="insertSelective" parameterType="com.lsilencej.blogsystem.entity.User">
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -71,7 +71,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lsilencej.blog_system.entity.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsilencej.blogsystem.entity.User">
     update t_user
     <set>
       <if test="username != null">
@@ -92,7 +92,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lsilencej.blog_system.entity.User">
+  <update id="updateByPrimaryKey" parameterType="com.lsilencej.blogsystem.entity.User">
     update t_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

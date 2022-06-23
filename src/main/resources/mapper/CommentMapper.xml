@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lsilencej.blog_system.mapper.CommentMapper">
-  <resultMap id="BaseResultMap" type="com.lsilencej.blog_system.entity.Comment">
+<mapper namespace="com.lsilencej.blogsystem.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.lsilencej.blogsystem.entity.Comment">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="article_id" jdbcType="INTEGER" property="articleId" />
     <result column="created" jdbcType="DATE" property="created" />
@@ -9,7 +9,7 @@
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="author" jdbcType="VARCHAR" property="author" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lsilencej.blog_system.entity.Comment">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lsilencej.blogsystem.entity.Comment">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -30,7 +30,7 @@
     delete from t_comment
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lsilencej.blog_system.entity.Comment">
+  <insert id="insert" parameterType="com.lsilencej.blogsystem.entity.Comment">
     insert into t_comment (id, article_id, created, 
       ip, status, author, 
       content)
@@ -38,7 +38,7 @@
       #{ip,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lsilencej.blog_system.entity.Comment">
+  <insert id="insertSelective" parameterType="com.lsilencej.blogsystem.entity.Comment">
     insert into t_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lsilencej.blog_system.entity.Comment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsilencej.blogsystem.entity.Comment">
     update t_comment
     <set>
       <if test="articleId != null">
@@ -111,7 +111,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lsilencej.blog_system.entity.Comment">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lsilencej.blogsystem.entity.Comment">
     update t_comment
     set article_id = #{articleId,jdbcType=INTEGER},
       created = #{created,jdbcType=DATE},
@@ -121,7 +121,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lsilencej.blog_system.entity.Comment">
+  <update id="updateByPrimaryKey" parameterType="com.lsilencej.blogsystem.entity.Comment">
     update t_comment
     set article_id = #{articleId,jdbcType=INTEGER},
       created = #{created,jdbcType=DATE},
@@ -130,16 +130,17 @@
       author = #{author,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByAid" resultType="com.lsilencej.blog_system.entity.Comment">
-    select * from t_comment where article_id = #{aid} order by id desc
+  <select id="selectByArticleId" resultType="com.lsilencej.blogsystem.entity.Comment">
+    select * from t_comment where article_id = #{articleId} order by id desc
   </select>
-  <select id="selectComments" resultType="com.lsilencej.blog_system.entity.Comment">
+  <select id="selectAllComments" resultType="com.lsilencej.blogsystem.entity.Comment">
     select * from t_comment order by id desc
   </select>
-  <select id="countComment" resultType="java.lang.Integer">
+  <select id="countComments" resultType="java.lang.Integer">
     select count(1) from t_comment
   </select>
-  <delete id="deleteByAid">
-    delete from t_comment where article_id = #{aid, jdbcType = INTEGER}
+  <delete id="deleteByArticleId">
+    delete from t_comment
+    where article_id = #{articleId, jdbcType=INTEGER}
   </delete>
 </mapper>
