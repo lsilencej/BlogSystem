@@ -3,16 +3,15 @@ package com.lsilencej.blogsystem.controller;
 import com.github.pagehelper.PageInfo;
 import com.lsilencej.blogsystem.entity.Article;
 import com.lsilencej.blogsystem.entity.Comment;
-import com.lsilencej.blogsystem.service.impl.ArticleServiceImpl;
-import com.lsilencej.blogsystem.service.impl.CommentServiceImpl;
-import com.lsilencej.blogsystem.service.impl.SiteServiceImpl;
+import com.lsilencej.blogsystem.service.ArticleService;
+import com.lsilencej.blogsystem.service.CommentService;
+import com.lsilencej.blogsystem.service.SiteService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -28,13 +27,13 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    private ArticleServiceImpl articleService;
+    private ArticleService articleService;
 
     @Autowired
-    private SiteServiceImpl siteService;
+    private SiteService siteService;
 
     @Autowired
-    private CommentServiceImpl commentService;
+    private CommentService commentService;
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
@@ -43,7 +42,7 @@ public class IndexController {
 
     @GetMapping("/page/{p}")
     public String index(HttpServletRequest request, @PathVariable("p") int page, @RequestParam(value = "count", defaultValue = "5") int count) {
-        PageInfo<Article> articles = articleService.getArticles(page, count);
+        PageInfo<Article> articles = articleService.getAllArticles(page, count);
         List<Article> hotArticles = articleService.getHotArticles();
         request.setAttribute("articles", articles);
         request.setAttribute("hotArticles", hotArticles);

@@ -40,11 +40,11 @@ public class ArticleServiceImpl implements ArticleService {
     private RedisTemplate redisTemplate;
 
     @Override
-    public PageInfo<Article> getArticles(int page, int count) {
+    public PageInfo<Article> getAllArticles(int page, int count) {
         PageHelper.startPage(page, count);
         List<Article> articles = articleMapper.getAllArticles();
         for (Article article: articles) {
-            Statistic statistic = statisticMapper.selectByPrimaryKey(article.getId());
+            Statistic statistic = statisticMapper.selectByArticleId(article.getId());
             article.setHits(statistic.getHits());
             article.setCommentsNum(statistic.getCommentsNum());
         }
@@ -53,7 +53,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getHotArticles() {
-        List<Statistic> statistics = statisticMapper.getOrderHitsComments();
+        List<Statistic> statistics = statisticMapper.getOrderByHitsComments();
         List<Article> articles = new ArrayList<>();
         int i = 0;
         for (Statistic statistic: statistics) {
@@ -92,7 +92,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void updateArticleById(Article article) {
+    public void updateArticle(Article article) {
         article.setModified(new Date());
         articleMapper.updateByPrimaryKeySelective(article);
         redisTemplate.delete("article_" + article.getId());

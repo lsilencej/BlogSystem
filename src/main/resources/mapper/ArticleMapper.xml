@@ -160,7 +160,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getAllArticles" resultType="com.lsilencej.blogsystem.entity.Article">
-    select * from t_article order by id desc
+    select * from t_article order by created desc
   </select>
   <select id="countAllArticles" resultType="java.lang.Integer">
     select count(1) from t_article

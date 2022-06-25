@@ -42,7 +42,7 @@ public class AdminController {
         return "back/index";
     }
 
-    @GetMapping("/article/toEditPage")
+    @GetMapping("/article/newPage")
     public String newArticle() {
         return "back/article_edit";
     }
@@ -63,7 +63,7 @@ public class AdminController {
 
     @GetMapping("/article")
     public String index(HttpServletRequest request, @RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "count", defaultValue = "10") int count) {
-        PageInfo<Article> pageInfo = articleService.getArticles(page, count);
+        PageInfo<Article> pageInfo = articleService.getAllArticles(page, count);
         request.setAttribute("articles", pageInfo);
         return "back/article_list";
     }
@@ -80,7 +80,7 @@ public class AdminController {
     @ResponseBody
     public ResponseData modifyArticle(Article article) {
         try {
-            articleService.updateArticleById(article);
+            articleService.updateArticle(article);
             return ResponseData.ok();
         } catch (Exception e) {
             return ResponseData.fail();

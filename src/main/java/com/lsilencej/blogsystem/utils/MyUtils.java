@@ -13,17 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 文章处理工具类
- */
+// 文章处理工具类
 public class MyUtils {
 
-     /**
-     * 提取html中的文字
-     *
-     * @param html
-     * @return
-     */
+    // 提取 html 中的文字
     public static String htmlToText(String html) {
         if (StringUtils.isNotBlank(html)) {
             return html.replaceAll("(?s)<[^>]*>(\\s*<[^>]*>)*", " ");
@@ -31,11 +24,7 @@ public class MyUtils {
         return "";
     }
 
-    /**
-     * Markdown转换为Html
-     * @param markdown
-     * @return     ok
-     */
+    // Markdown 转换为 Html
     public static String mdToHtml(String markdown) {
         if (StringUtils.isBlank(markdown)) {
             return "";
@@ -51,12 +40,7 @@ public class MyUtils {
         return content;
     }
 
-    /**
-     * 替换HTML脚本
-     *
-     * @param value
-     * @return
-     */
+    // 替换 html 脚本
     public static String cleanXSS(String value) {
         value = value.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
         value = value.replaceAll("\\(", "&#40;").replaceAll("\\)", "&#41;");

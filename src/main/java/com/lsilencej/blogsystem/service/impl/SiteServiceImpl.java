@@ -54,14 +54,14 @@ public class SiteServiceImpl implements SiteService {
     @Override
     public List<Comment> recentComments(int limit) {
         PageHelper.startPage(1, limit > 10 || limit < 1 ? 10 : limit);
-        return commentMapper.selectAllComments();
+        return commentMapper.getAllComments();
     }
 
     @Override
     public StatisticBack getStatisticBack() {
         StatisticBack statisticBack = new StatisticBack();
         statisticBack.setArticles(articleMapper.countAllArticles());
-        statisticBack.setComments(commentMapper.countComments());
+        statisticBack.setComments(commentMapper.countAllComments());
         return statisticBack;
     }
 }

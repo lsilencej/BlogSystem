@@ -7,13 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
-/**
- * @author ：lsilencej
- * @date ：Created in 2022/6/22 17:46
- * @description：
- * @modified By：
- * @version: $
- */
+
 @Controller
 public class LoginController {
 

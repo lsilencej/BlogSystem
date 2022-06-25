@@ -23,9 +23,9 @@ public interface CommentMapper {
 
     List<Comment> selectByArticleId(Integer articleId);
 
-    List<Comment> selectAllComments();
+    List<Comment> getAllComments();
 
-    int countComments();
+    int countAllComments();
 
     void deleteByArticleId(Integer articleId);
 }

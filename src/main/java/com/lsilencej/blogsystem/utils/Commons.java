@@ -8,46 +8,23 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * 页面数据展示封装类
- */
  @Component
 public class Commons {
-    /**
-     * 网站链接
-     *
-     * @return
-     */
+
+     // 网站链接
     public static String site_url() {
         return site_url("/page/1");
     }
-    /**
-     * 返回网站链接下的全址
-     *
-     * @param sub 后面追加的地址
-     * @return
-     */
+
+    // 返回全地址
     public static String site_url(String sub) {
         return site_option("site_url") + sub;
     }
 
-    /**
-     * 网站配置项
-     *
-     * @param key
-     * @return
-     */
     public static String site_option(String key) {
         return site_option(key, "");
     }
 
-    /**
-     * 网站配置项
-     *
-     * @param key
-     * @param defalutValue 默认值
-     * @return
-     */
     public static String site_option(String key, String defalutValue) {
         if (StringUtils.isBlank(key)) {
             return "";
@@ -55,13 +32,7 @@ public class Commons {
         return defalutValue;
     }
 
-    /**
-     * 截取字符串
-     *
-     * @param str
-     * @param len
-     * @return
-     */
+    // 截取字符串
     public static String substr(String str, int len) {
         if (str.length() > len) {
             return str.substring(0, len);
@@ -69,33 +40,18 @@ public class Commons {
         return str;
     }
 
-    /**
-     * 返回日期
-     *
-     * @return
-     */
+     // 返回日期
      public static String dateFormat(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
      }
 
-    /**
-     * 返回文章链接地址
-     *
-     * @param aid
-     * @return
-     */
-    public static String permalink(Integer aid) {
-        return site_url("/article/" + aid.toString());
+    // 返回文章链接地址
+    public static String permalink(Integer articleId) {
+        return site_url("/article/" + articleId.toString());
     }
 
-    /**
-     * 截取文章摘要
-     *
-     * @param article 文章
-     * @param len   要截取文字的个数
-     * @return
-     */
+    // 截取文章摘要
     public static String intro(Article article, int len) {
         String value = article.getContent();
         int pos = value.indexOf("<!--more-->");
@@ -111,11 +67,7 @@ public class Commons {
         }
     }
 
-    /**
-     * 对文章内容进行格式转换，将Markdown为Html
-     * @param value
-     * @return  ok
-     */
+    // 将 Markdown 转换为 Html
     public static String article(String value) {
         if (StringUtils.isNotBlank(value)) {
             value = value.replace("<!--more-->", "\r\n");
@@ -124,27 +76,15 @@ public class Commons {
         return "";
     }
 
-    /**
-     * 显示文章缩略图，顺序为：文章第一张图 -> 随机获取
-     *
-     * @return
-     */
+    // 文章缩略图
     public static String show_thumb(Article article) {
         if (StringUtils.isNotBlank(article.getThumbnail())){
             return article.getThumbnail();
         }
-        int cid = article.getId();
-        int size = cid % 24;
-        size = size == 0 ? 1 : size;
-        return "/user/img/rand/" + size + ".png";
+        return "https://image.lsilencej.top/i/2022/05/07/62764046d8c1d.jpg";
     }
 
-    /**
-     * 这种格式的字符转换为emoji表情
-     *
-     * @param value
-     * @return
-     */
+    // 转换为 Emoji
     public static String emoji(String value) {
         return EmojiParser.parseToUnicode(value);
     }

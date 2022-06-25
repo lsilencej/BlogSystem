@@ -2937,7 +2937,7 @@ div.dataTables_info {
 }
 
 .topbar .topbar-left {
-    background-color: #eee;
+    background-color: darkturquoise;
     float: left;
     height: 70px;
     position: relative;
@@ -3229,7 +3229,6 @@ body.fixed-left .side-menu.left {
 }
 
 #wrapper.enlarged .left.side-menu {
-    padding-top: 80px;
     width: 70px;
     z-index: 5
 }

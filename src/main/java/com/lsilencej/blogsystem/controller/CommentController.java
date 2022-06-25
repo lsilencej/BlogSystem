@@ -1,12 +1,12 @@
 package com.lsilencej.blogsystem.controller;
 
 import com.lsilencej.blogsystem.entity.Comment;
-import com.lsilencej.blogsystem.entity.User;
 import com.lsilencej.blogsystem.service.CommentService;
 import com.lsilencej.blogsystem.utils.MyUtils;
 import com.vdurmont.emoji.EmojiParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,10 +32,10 @@ public class CommentController {
     public ResponseData addComment(HttpServletRequest request, @RequestParam int articleId, @RequestParam String text) {
         text = MyUtils.cleanXSS(text);
         text = EmojiParser.parseToAliases(text);
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Comment comment = new Comment();
         comment.setArticleId(articleId);
-        comment.setAuthor(user.getUsername());
+        comment.setAuthor(userDetails.getUsername());
         comment.setContent(text);
         comment.setCreated(new Date());
         comment.setStatus("approved");

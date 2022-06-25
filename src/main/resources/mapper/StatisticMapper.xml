@@ -85,7 +85,7 @@
   <select id="getTotalCommentsNum" resultType="java.lang.Integer">
     select sum(comments_num) from t_statistic
   </select>
-  <select id="getOrderHitsComments" resultType="com.lsilencej.blogsystem.entity.Statistic">
+  <select id="getOrderByHitsComments" resultType="com.lsilencej.blogsystem.entity.Statistic">
     select * from t_statistic where hits != '0' order by hits desc, comments_num desc
   </select>
   <select id="selectByArticleId" resultType="com.lsilencej.blogsystem.entity.Statistic">

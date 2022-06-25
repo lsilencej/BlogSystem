@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ArticleService {
 
-    PageInfo<Article> getArticles(int page, int count);
+    PageInfo<Article> getAllArticles(int page, int count);
 
     List<Article> getHotArticles();
 
@@ -22,7 +22,7 @@ public interface ArticleService {
 
     void addArticle(Article article);
 
-    void updateArticleById(Article article);
+    void updateArticle(Article article);
 
     void deleteArticleById(int id);
 

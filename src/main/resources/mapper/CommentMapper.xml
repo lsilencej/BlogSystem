@@ -133,10 +133,10 @@
   <select id="selectByArticleId" resultType="com.lsilencej.blogsystem.entity.Comment">
     select * from t_comment where article_id = #{articleId} order by id desc
   </select>
-  <select id="selectAllComments" resultType="com.lsilencej.blogsystem.entity.Comment">
+  <select id="getAllComments" resultType="com.lsilencej.blogsystem.entity.Comment">
     select * from t_comment order by id desc
   </select>
-  <select id="countComments" resultType="java.lang.Integer">
+  <select id="countAllComments" resultType="java.lang.Integer">
     select count(1) from t_comment
   </select>
   <delete id="deleteByArticleId">

@@ -24,7 +24,7 @@ public interface StatisticMapper {
 
     int getTotalCommentsNum();
 
-    List<Statistic> getOrderHitsComments();
+    List<Statistic> getOrderByHitsComments();
 
     Statistic selectByArticleId(Integer articleId);
 

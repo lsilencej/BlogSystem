@@ -5,15 +5,10 @@ import java.util.Date;
 
 public class User implements Serializable {
     private Integer id;
-
     private String username;
-
     private String password;
-
     private String email;
-
     private Date created;
-
     private Boolean valid;
 
     public Integer getId() {
